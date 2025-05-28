@@ -1,14 +1,16 @@
-def solution(x1,y1,x2,y2):
-    if y2 < y1:
-        return "-1"
-    if y2 < y1 + x2 - x1:
-        return "-1"
-    #to find (p,q)
-    q = y1
-    p = y1 - y2 + x2
+def solution(n,arr):
+    xorres = arr[0]
+    for i in range(1,n):
+        xorres^=arr[i]
     
-    return str(abs(x1-p) + abs(y2-q))
-    
+    if n%2 == 0:
+        if xorres == 0:
+            return "2"
+        else:
+            return "-1"
+    else:
+        return xorres    
+        
 
 def main():
     import sys
@@ -19,9 +21,10 @@ def main():
     
     i = 1
     for _ in range(t):
-        a,b,c,d = map(int, lines[i].split())
-        print(solution(a,b,c,d))
-        i+=1
+        n = int(lines[i])
+        arr = [int(c) for c in lines[i+1].split()]
+        print(solution(n,arr))
+        i+=2
 
 if __name__ == "__main__":
     main()
